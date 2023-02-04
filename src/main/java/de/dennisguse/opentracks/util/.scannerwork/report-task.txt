@@ -1,6 +1,6 @@
-projectKey=Horizon_group_14
+projectKey=OpenTracks-Concordia-Main
 serverUrl=http://localhost:9000
-serverVersion=8.9.10.61524
-dashboardUrl=http://localhost:9000/dashboard?id=Horizon_group_14
-ceTaskId=AYYdrf-SmmuXLW5-kNQJ
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AYYdrf-SmmuXLW5-kNQJ
+serverVersion=9.8.0.63668
+dashboardUrl=http://localhost:9000/dashboard?id=OpenTracks-Concordia-Main
+ceTaskId=AYYe0j6Zph5NOTYQbE1w
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AYYe0j6Zph5NOTYQbE1w
