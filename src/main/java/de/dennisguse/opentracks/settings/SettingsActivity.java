@@ -77,27 +77,27 @@ public class SettingsActivity extends AbstractActivity implements ChooseActivity
     }
 
     private PreferenceFragmentCompat getPreferenceScreen(String key) {
-        PreferenceFragmentCompat fragment_prefScreen = null;
+        PreferenceFragmentCompat fragmentPrefScreen = null;
 
         if (key.equals(getString(R.string.settings_defaults_key))) {
-            fragment_prefScreen = new DefaultsSettingsFragment();
+            fragmentPrefScreen = new DefaultsSettingsFragment();
         } else if (key.equals(getString(R.string.settings_ui_key))) {
-            fragment_prefScreen = new UserInterfaceSettingsFragment();
+            fragmentPrefScreen = new UserInterfaceSettingsFragment();
         } else if (key.equals(getString(R.string.settings_gps_key))) {
-            fragment_prefScreen = new GpsSettingsFragment();
+            fragmentPrefScreen = new GpsSettingsFragment();
         } else if (key.equals(getString(R.string.settings_sensors_key))) {
-            fragment_prefScreen = new SensorsSettingsFragment();
+            fragmentPrefScreen = new SensorsSettingsFragment();
         } else if (key.equals(getString(R.string.settings_announcements_key))) {
-            fragment_prefScreen = new AnnouncementsSettingsFragment();
+            fragmentPrefScreen = new AnnouncementsSettingsFragment();
         } else if (key.equals(getString(R.string.settings_import_export_key))) {
-            fragment_prefScreen = new ImportExportSettingsFragment();
+            fragmentPrefScreen = new ImportExportSettingsFragment();
         } else if (key.equals(getString(R.string.settings_api_key))) {
-            fragment_prefScreen = new PublicAPISettingsFragment();
+            fragmentPrefScreen = new PublicAPISettingsFragment();
         } else if (key.equals(getString(R.string.settings_open_tracks_key))) {
-            fragment_prefScreen = new OpenTracksSettingsFragment();
+            fragmentPrefScreen = new OpenTracksSettingsFragment();
         }
 
-        return fragment_prefScreen;
+        return fragmentPrefScreen;
     }
 
     public PreferenceFragmentCompat openScreen(String key) {
