@@ -13,8 +13,6 @@ import de.dennisguse.opentracks.settings.PreferencesUtils;
 
 public class RecordingLayoutIO {
 
-    private RecordingLayoutIO(){} // Class not meant to be instantiated
-
     private static final String TAG = RecordingLayout.class.getSimpleName();
 
     private static final String YES_VALUE = "1";
