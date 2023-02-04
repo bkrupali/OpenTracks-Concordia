@@ -17,10 +17,11 @@ public enum UnitSystem {
         return preferenceIdentifier;
     }
 
-    @Deprecated //TODO used to initialize before loading from preferences; should be loaded first
     /**
-     * @deprecated
+     * @deprecated (It used to initialize before loading from preferences)
+     * TODO - should be loaded first
      */
+    @Deprecated(since="3.3.1")
     public static UnitSystem defaultUnitSystem() {
         return METRIC;
     }
