@@ -177,6 +177,16 @@ public class StatisticsRecordedFragment extends Fragment {
         viewBinding.statsStartDatetimeValue.setText(StringUtils.formatDateTimeWithOffsetIfDifferent(track.getStartTime()));
     }
 
+    // Set max speed/pace
+    private void setMaxSpeed(SpeedFormatter formatter, TrackStatistics trackStatistics)
+    {
+        viewBinding.statsMaxSpeedLabel.setText(preferenceReportSpeed ? R.string.stats_max_speed : R.string.stats_fastest_pace);
+
+        Pair<String, String> parts = formatter.getSpeedParts(trackStatistics.getMaxSpeed());
+        viewBinding.statsMaxSpeedValue.setText(parts.first);
+        viewBinding.statsMaxSpeedUnit.setText(parts.second);
+    }
+
     private void updateUI() {
         TrackStatistics trackStatistics = track.getTrackStatistics();
         // Set total distance
@@ -211,14 +221,7 @@ public class StatisticsRecordedFragment extends Fragment {
             viewBinding.statsAverageSpeedUnit.setText(parts.second);
         }
 
-        // Set max speed/pace
-        {
-            viewBinding.statsMaxSpeedLabel.setText(preferenceReportSpeed ? R.string.stats_max_speed : R.string.stats_fastest_pace);
-
-            Pair<String, String> parts = formatter.getSpeedParts(trackStatistics.getMaxSpeed());
-            viewBinding.statsMaxSpeedValue.setText(parts.first);
-            viewBinding.statsMaxSpeedUnit.setText(parts.second);
-        }
+        setMaxSpeed(formatter, trackStatistics);
 
         // Set moving speed/pace
         {
@@ -250,9 +253,7 @@ public class StatisticsRecordedFragment extends Fragment {
     }
 
     private void updateSensorUI() {
-        if (sensorStatistics == null) {
-            return;
-        }
+
         //TODO
     }
 }
