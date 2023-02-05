@@ -71,7 +71,7 @@ public class ImportViewModel extends AndroidViewModel implements ImportServiceRe
     @Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
         if (resultData == null) {
-            throw new RuntimeException(TAG + ": onReceiveResult resultData NULL");
+            throw new IllegalArgumentException(TAG + ": onReceiveResult resultData NULL");
         }
 
         ArrayList<Track.Id> trackIds = resultData.getParcelableArrayList(ImportServiceResultReceiver.RESULT_EXTRA_LIST_TRACK_ID);
@@ -91,7 +91,7 @@ public class ImportViewModel extends AndroidViewModel implements ImportServiceRe
                 summary.existsCount++;
                 break;
             default:
-                throw new RuntimeException(TAG + ": import service result code invalid: " + resultCode);
+                throw new IllegalArgumentException(TAG + ": import service result code invalid: " + resultCode);
         }
 
         importData.postValue(summary);
