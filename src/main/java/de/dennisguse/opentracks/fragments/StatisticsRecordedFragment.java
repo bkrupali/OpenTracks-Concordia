@@ -115,7 +115,6 @@ public class StatisticsRecordedFragment extends Fragment {
 
         RecyclerView sensorsRecyclerView = viewBinding.statsSensorsRecyclerView;
         sensorsRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
-//        sensorsRecyclerView.setAdapter(sensorsAdapter);
 
         return viewBinding.getRoot();
     }
@@ -177,6 +176,7 @@ public class StatisticsRecordedFragment extends Fragment {
         viewBinding.statsStartDatetimeValue.setText(StringUtils.formatDateTimeWithOffsetIfDifferent(track.getStartTime()));
     }
 
+
     // Set max speed/pace
     private void setMaxSpeed(SpeedFormatter formatter, TrackStatistics trackStatistics)
     {
@@ -185,6 +185,7 @@ public class StatisticsRecordedFragment extends Fragment {
         Pair<String, String> parts = formatter.getSpeedParts(trackStatistics.getMaxSpeed());
         viewBinding.statsMaxSpeedValue.setText(parts.first);
         viewBinding.statsMaxSpeedUnit.setText(parts.second);
+
     }
 
     private void updateUI() {
@@ -199,11 +200,11 @@ public class StatisticsRecordedFragment extends Fragment {
             viewBinding.statsDistanceUnit.setText(parts.second);
         }
 
-        // Set activity type
         {
-            String trackIconValue = TrackIconUtils.getIconValue(getContext(), track.getCategory());
-            viewBinding.statsActivityTypeIcon.setImageDrawable(ContextCompat.getDrawable(getContext(), TrackIconUtils.getIconDrawable(trackIconValue)));
-        }
+        String trackIconValue = TrackIconUtils.getIconValue(getContext(), track.getCategory());
+        viewBinding.statsActivityTypeIcon.setImageDrawable(ContextCompat.getDrawable(getContext(), TrackIconUtils.getIconDrawable(trackIconValue)));
+
+    }
 
         // Set time and start datetime
         {
