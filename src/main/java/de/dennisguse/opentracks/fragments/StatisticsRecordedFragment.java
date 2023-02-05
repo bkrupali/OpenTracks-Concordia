@@ -253,7 +253,6 @@ public class StatisticsRecordedFragment extends Fragment {
     }
 
     private void updateSensorUI() {
-
         //TODO
     }
 }
