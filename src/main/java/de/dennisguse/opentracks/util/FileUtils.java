@@ -114,6 +114,7 @@ public class FileUtils {
      *
      * @param fileName the file name
      * @return null if there is no extension or fileName is null.
+     * 
      */
     public static String getExtension(String fileName) {
         if (fileName == null || fileName.lastIndexOf('.') == -1) {

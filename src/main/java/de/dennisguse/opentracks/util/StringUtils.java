@@ -242,7 +242,7 @@ public class StringUtils {
 
     /**
      * @return the formatted altitudeM (or null) and it's unit as {@link Pair}
-     * 
+     *
      */
     //TODO altitude_m should be double or a value object
     public static Pair<String, String> getAltitudeParts(Context context, Float altitudeM, UnitSystem unitSystem) {
