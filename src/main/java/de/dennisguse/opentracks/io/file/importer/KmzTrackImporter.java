@@ -204,7 +204,11 @@ public class KmzTrackImporter {
                 }
             }
             if (dir.listFiles().length == 0) {
-                dir.delete();
+                if(dir.delete()){
+                    log.debug("File Deleted Successfully");
+                }else{
+                    log.debug("Error. File does not exist.");
+                }
             }
         }
     }

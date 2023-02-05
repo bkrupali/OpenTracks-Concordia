@@ -145,6 +145,8 @@ public class GpxTrackImporter extends DefaultHandler implements XMLImporter.Trac
             case TAG_TRACK_POINT:
                 onTrackPointStart(attributes);
                 break;
+            default:
+                throw new IllegalArgumentException("Invalid Tag value " + tag);
         }
     }
 
@@ -172,87 +174,63 @@ public class GpxTrackImporter extends DefaultHandler implements XMLImporter.Trac
             case TAG_TRACK_POINT:
                 currentSegment.add(createTrackPoint());
                 break;
-            case TAG_NAME:
-                if (content != null) {
+            default:
+                break;
+        }
+
+        if(content != null){
+            switch(tag){
+                case TAG_NAME:
                     name = content.trim();
-                }
-                break;
-            case TAG_DESCRIPTION:
-                if (content != null) {
+                    break;
+                case TAG_DESCRIPTION:
                     description = content.trim();
-                }
-                break;
-            case TAG_TYPE:
-                if (content != null) {
+                    break;
+                case TAG_TYPE:
                     category = content.trim();
-                }
-                break;
-            case TAG_TIME:
-                if (content != null) {
+                    break;
+                case TAG_TIME:
                     time = content.trim();
-                }
-                break;
-            case TAG_ALTITUDE:
-                if (content != null) {
+                    break;
+                case TAG_ALTITUDE:
                     altitude = content.trim();
-                }
-                break;
-            case TAG_COMMENT:
-                if (content != null) {
+                    break;
+                case TAG_COMMENT:
                     markerType = content.trim();
-                }
-                break;
-            case TAG_EXTENSION_SPEED:
-            case TAG_EXTENSION_SPEED_COMPAT:
-                if (content != null) {
+                    break;
+                case TAG_EXTENSION_SPEED_COMPAT:
                     speed = content.trim();
-                }
-                break;
-            case TAG_EXTENSION_HEARTRATE:
-                if (content != null) {
+                    break;
+                case TAG_EXTENSION_HEARTRATE:
                     heartrate = content.trim();
-                }
-                break;
-            case TAG_EXTENSION_CADENCE:
-                if (content != null) {
+                    break;
+                case TAG_EXTENSION_CADENCE:
                     cadence = content.trim();
-                }
-                break;
-            case TAG_EXTENSION_POWER:
-                if (content != null) {
+                    break;
+                case TAG_EXTENSION_POWER:
                     power = content.trim();
-                }
-                break;
-            case TAG_ID:
-                if (content != null) {
+                    break;
+                case TAG_ID:
                     uuid = content.trim();
-                }
-                break;
-            case TAG_EXTENSION_GAIN:
-                if (content != null) {
+                    break;
+                case TAG_EXTENSION_GAIN:
                     gain = content.trim();
-                }
-                break;
-            case TAG_EXTENSION_LOSS:
-                if (content != null) {
+                    break;
+                case TAG_EXTENSION_LOSS:
                     loss = content.trim();
-                }
-                break;
-            case TAG_EXTENSION_DISTANCE:
-                if (content != null) {
+                    break;
+                case TAG_EXTENSION_DISTANCE:
                     sensorDistance = content.trim();
-                }
-                break;
-            case TAG_EXTENSION_ACCURACY_HORIZONTAL:
-                if (content != null) {
+                    break;
+                case TAG_EXTENSION_ACCURACY_HORIZONTAL:
                     accuracyHorizontal = content.trim();
-                }
-                break;
-            case TAG_EXTENSION_ACCURACY_VERTICAL:
-                if (content != null) {
+                    break;
+                case TAG_EXTENSION_ACCURACY_VERTICAL:
                     accuracyVertical = content.trim();
-                }
-                break;
+                    break;
+                default:
+                    throw new IllegalArgumentException("Wrong tag value " + tag);
+            }
         }
 
         content = "";
