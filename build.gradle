@@ -82,9 +82,6 @@ android {
     }
 
     namespace 'de.dennisguse.opentracks'
-    lintOptions {
-        baseline file("lint-baseline.xml")
-    }
     buildTypes {
         debug {
             applicationIdSuffix ".debug"
