@@ -71,6 +71,12 @@ public class KMLTrackExporter implements TrackExporter {
     public static final String EXTENDED_DATA_TYPE_ACCURACY_HORIZONTAL = "accuracy_horizontal";
     public static final String EXTENDED_DATA_TYPE_ACCURACY_VERTICAL = "accuracy_vertical";
 
+    public static final String DESCRIPTION_OPEN_TAG = "<description>";
+    public static final String DESCRIPTION_CLOSE_TAG = "</description>";
+
+    public static final String STYLEURL_OPEN_TAG = "<styleUrl>#";
+    public static final String STYLEURL_CLOSE_TAG = "</styleUrl>";
+
     private static final NumberFormat SENSOR_DATA_FORMAT = NumberFormat.getInstance(Locale.US);
 
     static {
@@ -303,16 +309,18 @@ public class KMLTrackExporter implements TrackExporter {
         }
     }
 
+
+
     private void writeBeginTrack(Track track) {
         if (printWriter != null) {
             printWriter.println("<Placemark>");
 
             printWriter.println("<name>" + StringUtils.formatCData(track.getName()) + "</name>");
-            printWriter.println("<description>" + StringUtils.formatCData(track.getDescription()) + "</description>");
+            printWriter.println(DESCRIPTION_OPEN_TAG + StringUtils.formatCData(track.getDescription()) + DESCRIPTION_CLOSE_TAG);
             printWriter.println("<icon>" + StringUtils.formatCData(track.getIcon()) + "</icon>");
             printWriter.println("<opentracks:trackid>" + track.getUuid() + "</opentracks:trackid>");
 
-            printWriter.println("<styleUrl>#" + TRACK_STYLE + "</styleUrl>");
+            printWriter.println(STYLEURL_OPEN_TAG + TRACK_STYLE + STYLEURL_CLOSE_TAG);
             writeCategory(track.getCategory());
             printWriter.println("<MultiTrack>");
             printWriter.println("<altitudeMode>absolute</altitudeMode>");
@@ -437,9 +445,9 @@ public class KMLTrackExporter implements TrackExporter {
         if (location != null) {
             printWriter.println("<Placemark>");
             printWriter.println("<name>" + StringUtils.formatCData(name) + "</name>");
-            printWriter.println("<description>" + StringUtils.formatCData(description) + "</description>");
+            printWriter.println(DESCRIPTION_OPEN_TAG + StringUtils.formatCData(description) + DESCRIPTION_CLOSE_TAG);
             printWriter.println("<TimeStamp><when>" + getTime(zoneOffset, location) + "</when></TimeStamp>");
-            printWriter.println("<styleUrl>#" + KMLTrackExporter.MARKER_STYLE + "</styleUrl>");
+            printWriter.println(STYLEURL_OPEN_TAG + KMLTrackExporter.MARKER_STYLE + STYLEURL_CLOSE_TAG);
             writeCategory(category);
             printWriter.println("<Point>");
             printWriter.println("<coordinates>" + getCoordinates(location, ",") + "</coordinates>");
@@ -451,7 +459,7 @@ public class KMLTrackExporter implements TrackExporter {
     private void writePhotoOverlay(Marker marker, float heading, ZoneOffset zoneOffset) {
         printWriter.println("<PhotoOverlay>");
         printWriter.println("<name>" + StringUtils.formatCData(marker.getName()) + "</name>");
-        printWriter.println("<description>" + StringUtils.formatCData(marker.getDescription()) + "</description>");
+        printWriter.println(DESCRIPTION_OPEN_TAG + StringUtils.formatCData(marker.getDescription()) + DESCRIPTION_CLOSE_TAG);
         printWriter.print("<Camera>");
         printWriter.print("<longitude>" + marker.getLongitude() + "</longitude>");
         printWriter.print("<latitude>" + marker.getLatitude() + "</latitude>");
@@ -460,7 +468,7 @@ public class KMLTrackExporter implements TrackExporter {
         printWriter.print("<tilt>90</tilt>");
         printWriter.println("</Camera>");
         printWriter.println("<TimeStamp><when>" + getTime(zoneOffset, marker.getLocation()) + "</when></TimeStamp>");
-        printWriter.println("<styleUrl>#" + MARKER_STYLE + "</styleUrl>");
+        printWriter.println(STYLEURL_OPEN_TAG + MARKER_STYLE + STYLEURL_CLOSE_TAG);
         writeCategory(marker.getCategory());
 
         if (exportPhotos) {
