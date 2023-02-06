@@ -3,9 +3,6 @@ package de.dennisguse.opentracks.viewmodels;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.os.Build;
-
-import androidx.core.content.ContextCompat;
 
 import de.dennisguse.opentracks.R;
 import de.dennisguse.opentracks.data.models.DistanceFormatter;
@@ -30,13 +27,8 @@ public abstract class GenericStatisticsViewHolder extends StatisticViewHolder<St
 
     @Override
     public void configureUI(DataField dataField) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            getBinding().statsValue.setTextAppearance(dataField.isPrimary() ? R.style.TextAppearance_OpenTracks_PrimaryValue : R.style.TextAppearance_OpenTracks_SecondaryValue);
-            getBinding().statsDescriptionMain.setTextAppearance(dataField.isPrimary() ? R.style.TextAppearance_OpenTracks_PrimaryHeader : R.style.TextAppearance_OpenTracks_SecondaryHeader);
-        } else {
-            getBinding().statsValue.setTextAppearance(getContext(), dataField.isPrimary() ? R.style.TextAppearance_OpenTracks_PrimaryValue : R.style.TextAppearance_OpenTracks_SecondaryValue);
-            getBinding().statsDescriptionMain.setTextAppearance(getContext(), dataField.isPrimary() ? R.style.TextAppearance_OpenTracks_PrimaryHeader : R.style.TextAppearance_OpenTracks_SecondaryHeader);
-        }
+        getBinding().statsValue.setTextAppearance(getContext(), dataField.isPrimary() ? R.style.TextAppearance_OpenTracks_PrimaryValue : R.style.TextAppearance_OpenTracks_SecondaryValue);
+        getBinding().statsDescriptionMain.setTextAppearance(getContext(), dataField.isPrimary() ? R.style.TextAppearance_OpenTracks_PrimaryHeader : R.style.TextAppearance_OpenTracks_SecondaryHeader);
     }
 
     public static class Distance extends GenericStatisticsViewHolder {
@@ -82,7 +74,7 @@ public abstract class GenericStatisticsViewHolder extends StatisticViewHolder<St
         public void onChanged(UnitSystem unitSystem, RecordingData data) {
             // TODO Pace wont work for now
             boolean reportSpeed = true;
-            SpeedFormatter localSpeedFormatter = SpeedFormatter.Builder()
+            SpeedFormatter localSpeedFormatter = SpeedFormatter.getBuilderRef()
                     .setUnit(unitSystem)
                     .setReportSpeedOrPace(reportSpeed).build(getContext());
 
@@ -108,7 +100,7 @@ public abstract class GenericStatisticsViewHolder extends StatisticViewHolder<St
 
         @Override
         public void onChanged(UnitSystem unitSystem, RecordingData data) {
-            SpeedFormatter speedFormatterSpeed = SpeedFormatter.Builder()
+            SpeedFormatter speedFormatterSpeed = SpeedFormatter.getBuilderRef()
                     .setUnit(unitSystem)
                     .setReportSpeedOrPace(true)
                     .build(getContext());
@@ -125,7 +117,7 @@ public abstract class GenericStatisticsViewHolder extends StatisticViewHolder<St
 
         @Override
         public void onChanged(UnitSystem unitSystem, RecordingData data) {
-            SpeedFormatter speedFormatterSpeed = SpeedFormatter.Builder()
+            SpeedFormatter speedFormatterSpeed = SpeedFormatter.getBuilderRef()
                     .setUnit(unitSystem)
                     .setReportSpeedOrPace(true)
                     .build(getContext());
@@ -142,7 +134,7 @@ public abstract class GenericStatisticsViewHolder extends StatisticViewHolder<St
 
         @Override
         public void onChanged(UnitSystem unitSystem, RecordingData data) {
-            SpeedFormatter speedFormatterSpeed = SpeedFormatter.Builder()
+            SpeedFormatter speedFormatterSpeed = SpeedFormatter.getBuilderRef()
                     .setUnit(unitSystem)
                     .setReportSpeedOrPace(true)
                     .build(getContext());
@@ -159,7 +151,7 @@ public abstract class GenericStatisticsViewHolder extends StatisticViewHolder<St
 
         @Override
         public void onChanged(UnitSystem unitSystem, RecordingData data) {
-            SpeedFormatter speedFormatterSpeed = SpeedFormatter.Builder()
+            SpeedFormatter speedFormatterSpeed = SpeedFormatter.getBuilderRef()
                     .setUnit(unitSystem)
                     .setReportSpeedOrPace(false)
                     .build(getContext());
@@ -176,7 +168,7 @@ public abstract class GenericStatisticsViewHolder extends StatisticViewHolder<St
 
         @Override
         public void onChanged(UnitSystem unitSystem, RecordingData data) {
-            SpeedFormatter speedFormatterSpeed = SpeedFormatter.Builder()
+            SpeedFormatter speedFormatterSpeed = SpeedFormatter.getBuilderRef()
                     .setUnit(unitSystem)
                     .setReportSpeedOrPace(false)
                     .build(getContext());
@@ -193,7 +185,7 @@ public abstract class GenericStatisticsViewHolder extends StatisticViewHolder<St
 
         @Override
         public void onChanged(UnitSystem unitSystem, RecordingData data) {
-            SpeedFormatter speedFormatterSpeed = SpeedFormatter.Builder()
+            SpeedFormatter speedFormatterSpeed = SpeedFormatter.getBuilderRef()
                     .setUnit(unitSystem)
                     .setReportSpeedOrPace(false)
                     .build(getContext());
@@ -280,10 +272,10 @@ public abstract class GenericStatisticsViewHolder extends StatisticViewHolder<St
             if (sensorDataSet != null && sensorDataSet.getHeartRate() != null) {
                 valueAndUnit = StringUtils.getHeartRateParts(getContext(), sensorDataSet.getHeartRate().first);
                 sensorName = sensorDataSet.getHeartRate().second;
-                textColor = zones.getColorForZone(sensorDataSet.getHeartRate().first);
+                textColor = zones.getTextColorForZone(getContext(), sensorDataSet.getHeartRate().first);
             } else {
                 valueAndUnit = StringUtils.getHeartRateParts(getContext(), null);
-                textColor = zones.getColorForZone(null);
+                textColor = zones.getTextColorForZone(getContext(), null);
             }
 
             getBinding().statsValue.setText(valueAndUnit.first);
@@ -293,7 +285,7 @@ public abstract class GenericStatisticsViewHolder extends StatisticViewHolder<St
             getBinding().statsDescriptionSecondary.setVisibility(View.VISIBLE);
             getBinding().statsDescriptionSecondary.setText(sensorName);
 
-            getBinding().statsValue.setTextColor(ContextCompat.getColor(getContext(), textColor));
+            getBinding().statsValue.setTextColor(textColor);
         }
     }
 

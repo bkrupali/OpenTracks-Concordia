@@ -47,12 +47,13 @@ public class ImportViewModel extends AndroidViewModel implements ImportServiceRe
     }
 
     private void loadData(List<DocumentFile> documentFiles) {
-        List<List<DocumentFile>> nestedFileList = documentFiles.stream()
+        List<DocumentFile> nestedFileList = documentFiles.stream()
                 .map(FileUtils::getFiles)
+                .flatMap(List::stream)
                 .collect(Collectors.toList());
 
         List<DocumentFile> fileList = new ArrayList<>();
-        nestedFileList.forEach(fileList::addAll);
+        fileList.addAll(nestedFileList);
 
         summary.totalCount = fileList.size();
         filesToImport.addAll(fileList);
